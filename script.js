@@ -63,3 +63,33 @@ function obtenerDatosHistoricos() {
 // Llamar a la función para obtener los datos al cargar la página
 window.onload = obtenerDatosHistoricos;
 
+const apiKey = "TU_API_KEY"; // Reemplaza con tu API Key de Twelve Data
+const url = `https://api.twelvedata.com/time_series?symbol=EUR/USD&interval=1min&start_date=2025-05-02 08:00:00&end_date=2025-05-02 09:00:00&apikey=${apiKey}`;
+
+async function obtenerRangoLondres() {
+  try {
+    const respuesta = await fetch(url);
+    const datos = await respuesta.json();
+    const velas = datos.values;
+
+    if (!velas || velas.length === 0) throw new Error("No se encontraron datos.");
+
+    let max = parseFloat(velas[0].high);
+    let min = parseFloat(velas[0].low);
+
+    for (let vela of velas) {
+      const high = parseFloat(vela.high);
+      const low = parseFloat(vela.low);
+      if (high > max) max = high;
+      if (low < min) min = low;
+    }
+
+    document.getElementById("max").textContent = max.toFixed(5);
+    document.getElementById("min").textContent = min.toFixed(5);
+  } catch (error) {
+    console.error("Error al obtener el rango de Londres:", error);
+  }
+}
+
+obtenerRangoLondres();
+
