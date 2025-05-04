@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0f1b2b;
+  color: #ffffff;
+}
+
+header {
+  background-color: #162a45;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+section.grafico {
+  margin-bottom: 30px;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.temporizador, .noticias {
+  background-color: #1c2c45;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #101e33;
+  font-size: 14px;
+}
