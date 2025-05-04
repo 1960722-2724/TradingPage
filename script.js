@@ -34,26 +34,27 @@ function obtenerDatosHistoricos() {
         const tiempo = Object.keys(data['Time Series FX (5min)']);
         const precios = tiempo.map(tiempo => data['Time Series FX (5min)'][tiempo]);
 
-        // Calcular el rango asiático
+        // Calcular el rango de Londres
         let maxPrice = -Infinity;
         let minPrice = Infinity;
 
         for (let i = 0; i < precios.length; i++) {
-          // Usamos solo los datos entre las 00:00 y 05:00 GMT
+          // Usamos solo los datos entre las 08:00 y 17:00 GMT
           const hora = new Date(tiempo[i]).getUTCHours();
-          if (hora >= 0 && hora < 5) {
+          if (hora >= 8 && hora < 17) {
             const precioApertura = parseFloat(precios[i]['1. open']);
             maxPrice = Math.max(maxPrice, precioApertura);
             minPrice = Math.min(minPrice, precioApertura);
           }
         }
 
-        // Mostrar el rango asiático
-        console.log('Rango Asiático:');
+        // Mostrar el rango de Londres en consola
+        console.log('Rango de Londres:');
         console.log('Máximo: ' + maxPrice);
         console.log('Mínimo: ' + minPrice);
 
-        // Puedes usar estos valores para dibujar en el gráfico de TradingView o mostrarlos en pantalla
+        // Aquí es donde almacenamos estos valores en la base de datos
+        guardarEnBaseDeDatos(maxPrice, minPrice);
       }
     })
     .catch(error => console.error('Error obteniendo los datos:', error));
@@ -61,3 +62,4 @@ function obtenerDatosHistoricos() {
 
 // Llamar a la función para obtener los datos al cargar la página
 window.onload = obtenerDatosHistoricos;
+
