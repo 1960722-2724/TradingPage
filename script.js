@@ -21,7 +21,7 @@ function calcularTiempo() {
 window.onload = calcularTiempo;
 
 // Tu API Key de Alpha Vantage
-const apiKey = 'TU_API_KEY';  // Reemplaza con tu propia API Key
+const apiKey = C4861DKPF23S9H39;  // Reemplaza con tu propia API Key
 
 // Función para obtener los datos históricos de EUR/USD
 function obtenerDatosHistoricos() {
